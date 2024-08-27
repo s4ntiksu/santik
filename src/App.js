@@ -1,5 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './elements/langswitch';
 import Header from './elements/header.jsx';
 import santiksu from './images/santiksu.png';
 import { ReactComponent as Lastfmlogo } from './icons/lastfm.svg';
@@ -11,6 +13,7 @@ import { ReactComponent as V } from './icons/VOVK.svg';
 import { ReactComponent as O } from './icons/New-Project-8-_89BEADC_.svg';
 import Lastfm from './elements/lastfm'
 export default function App() {
+  const { t } = useTranslation();
   const [birthdate] = useState(new Date('2005-11-16'));
   const [ageYears, setAgeYears] = useState(0);
 
@@ -32,14 +35,16 @@ export default function App() {
   return (
     <div>
       <Header />
-      <figure className="w-80 p-4 bg-[#23261E] h-auto rounded-xl mt-36 mx-auto font-google text-white">
+      <div className="p-4">
+      <figure className="w-full p-4 bg-[#23261E] h-auto rounded-xl mt-16 mx-auto font-google text-white">
         <h1 className="text-2xl mb-4">About me</h1>
         <div className="flex items-center">
           <img className="rounded-full w-24 mr-4" src={santiksu} alt="Avatar" />
           <div>
-            <h3 className="text-lg font-bold">Alexander Timush</h3>
-            <p className="text-[#E4E3DD]">Nickname: santiksu</p>
+            <h3 className="text-lg font-bold">{t('name')}</h3>
+            <p className="text-[#E4E3DD]">Nickname: santiksu (for frens: santik)</p>
             <p className="text-[#6D7264]">Age: {ageYears} y.o.</p>
+            
           </div>
         </div>
         <div className="mt-4">
@@ -70,7 +75,9 @@ export default function App() {
         </div>
                 <h1 className="text-2xl mt-4 mb-4">I'm listening to</h1>
                 <Lastfm />
+                <LanguageSwitcher />
       </figure>
+      </div>
     </div>
   );
 }
